@@ -127,4 +127,48 @@ Equation* e;
 // 実は虚数や0で割り算した場合など，計算結果が実数で表せない値になってしまったとき
 // nan という特殊な数値になります。
 // それでテストがパスしてしまったのですね。
+
+//------------以下から課題------------//
+
+// 2-1.結果が2つの実数解になるテストケース
+// x^2 - 16x + 63 = 0 をテスト
+- (void)test_case1
+{
+    e = [[Equation alloc] initWithA:1 b:-16 c:63];
+    
+    STAssertEqualsWithAccuracy(9.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(7.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+// 答えは実数解x=7,x=9となる。
+
+// 2-2.結果が1つの実数解になるテストケース
+// x^2 - 4x + 4 = 0 をテスト
+- (void)test_case2
+{
+    e = [[Equation alloc] initWithA:1 b:-4 c:4];
+    
+    STAssertEqualsWithAccuracy(2.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(2.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(0.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+// 答えは重解x=2となる。
+
+// 2-3.結果が2つの虚数解になるテストケース
+// x^2 - 6x + 13 = 0 をテスト
+- (void)test_case3
+{
+    e = [[Equation alloc] initWithA:1 b:-6 c:13];
+    
+    STAssertEqualsWithAccuracy(3.0, [e real1], 0.00001, @"real1 error");
+    STAssertEqualsWithAccuracy(3.0, [e real2], 0.00001, @"real2 error");
+    STAssertEqualsWithAccuracy(2.0, [e imaginary1], 0.00001, @"imaginary1 error");
+    STAssertEqualsWithAccuracy(-2.0, [e imaginary2], 0.00001, @"imaginary2 error");
+}
+// 答えは虚数解x=3+2i,x=3-2iとなる。
+
+
+
 @end
